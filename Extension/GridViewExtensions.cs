@@ -20,6 +20,21 @@ namespace HadesFormCommon.Extension
             };
             dataGridView.Columns.Add(col);
         }
+        public static void SortGeneric<T>(this DataGridView dataGridView, string colName, bool ascending)
+        {
+            var data = dataGridView.Rows
+                .Cast<DataGridViewRow>()
+                .Select(r => r.DataBoundItem)
+                .Cast<T>();
+            if (ascending)
+            {
+                dataGridView.DataSource = data.OrderBy(_ => _?.GetType()?.GetProperty(colName)?.GetValue(_)).ToList();
+            }
+            else
+            {
+                dataGridView.DataSource = data.OrderByDescending(_ => _?.GetType()?.GetProperty(colName)?.GetValue(_)).ToList();
+            }
+        }
         public static void SetDataSource<T>(this DataGridView dataGridView, List<T> dataSource)
         {
             dataGridView.Invoke(new Action(() =>
