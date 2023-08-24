@@ -82,7 +82,7 @@ namespace HadesFormCommon.Utilities
             {
                 row.Cells[IndexRowName].Value = row.Index + 1;
             }
-        }      
+        }
         public static void SortDataGridView<T>(DataGridView dataGridView, string colName, bool ascending)
         {
             var data = dataGridView.Rows
@@ -149,7 +149,7 @@ namespace HadesFormCommon.Utilities
         public static List<string> ChooseFiles(string? title = null, string filter = "Select files |*")
         {
             var files = new List<string>();
-            using (OpenFileDialog fileDialog = new())
+            using (var fileDialog = new OpenFileDialog())
             {
                 fileDialog.AddExtension = true;
                 fileDialog.AutoUpgradeEnabled = true;
