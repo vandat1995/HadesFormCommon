@@ -8,7 +8,7 @@ namespace HadesFormCommon.Extension
 {
     public static class GridViewExtensions
     {
-        public static void CreateColumn(this DataGridView dataGridView, string headerText, string name)
+        public static void CreateColumn(this DataGridView dataGridView, string headerText, string name, int width = 0)
         {
             DataGridViewTextBoxCell cell = new();
             DataGridViewColumn col = new()
@@ -18,6 +18,10 @@ namespace HadesFormCommon.Extension
                 DataPropertyName = name,
                 CellTemplate = cell
             };
+            if (width > 0)
+            {
+                col.Width = width;
+            }
             dataGridView.Columns.Add(col);
         }
         public static void SortGeneric<T>(this DataGridView dataGridView, string colName, bool ascending)
@@ -47,5 +51,27 @@ namespace HadesFormCommon.Extension
                 }
             }));
         }
+
+        public static void ChangeCellBackColor(this DataGridView dataGridView, int rowIndex, string colName, Color color)
+        {
+            if (dataGridView.Rows.Count <= rowIndex)
+            {
+                return;
+            }
+            dataGridView.Rows[rowIndex].Cells[colName].Style.BackColor = color;
+        }
+        public static void ChangeCellForeColor(this DataGridView dataGridView, int rowIndex, string colName, Color color)
+        {
+            if (dataGridView.Rows.Count <= rowIndex)
+            {
+                return;
+            }
+            dataGridView.Invoke(new Action(() =>
+            {
+                dataGridView.Rows[rowIndex].Cells[colName].Style.ForeColor = color;
+            }));
+        }
+
+
     }
 }
