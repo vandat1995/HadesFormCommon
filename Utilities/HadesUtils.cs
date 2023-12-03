@@ -76,6 +76,13 @@ namespace HadesFormCommon.Utilities
                 col.AutoSizeMode = mode;
             }
         }
+        public static void SetColumnsWidth(DataGridView dataGridView, int size, params string[] columns)
+        {
+            foreach (var colName in columns)
+            {
+                dataGridView.Columns[colName].Width = size;
+            }
+        }
         public static void BindingRowIndexGridView(DataGridView dataGridView, string IndexRowName = "STT")
         {
             foreach (DataGridViewRow row in dataGridView.Rows)
