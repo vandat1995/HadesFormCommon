@@ -135,6 +135,7 @@ namespace HadesFormCommon.Utilities
             return controls.First();
         }
 
+       
         public static string ChooseFile(string? title = null, string filter = "Select file |*")
         {
             string fileName = string.Empty;
@@ -171,6 +172,7 @@ namespace HadesFormCommon.Utilities
             }
             return files;
         }
+
 
     }
 }
